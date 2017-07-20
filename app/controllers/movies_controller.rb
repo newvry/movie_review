@@ -4,6 +4,14 @@ class MoviesController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
 
+  def search
+    if params[:search].present?
+      @movies = Movie.search(params[:search])
+    else
+      @movies = Movie.all
+    end
+  end
+
   def index
     @movies = Movie.all
   end
